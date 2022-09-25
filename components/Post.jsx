@@ -5,11 +5,17 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 const Post = ({ Postdata, showFullPost, navigation }) => {
     return (
-        <View style={styles.container} onTouchEndCapture={()=>showFullPost(id)}>
+        <View
+            style={styles.container}
+            onTouchEndCapture={() => showFullPost(id)}
+        >
             <View style={styles.header}>
                 <Image
+                    style={styles.avatar}
                     source={{
-                        uri: Postdata?.profile?.picture?.original?.url,
+                        uri:
+                            Postdata?.profile?.picture?.original?.url ||
+                            "https://i.pravatar.cc/300",
                     }}
                 />
                 <Text style={styles.name}>{Postdata.profile?.name}</Text>
@@ -75,16 +81,25 @@ export default Post;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#2d2d2d",
-        marginVertical: 10,
-        marginHorizontal: 10,
+        marginVertical: 5,
         padding: 10,
         display: "flex",
         flexDirection: "column",
-        borderRadius: 4,
+    },
+    avatar: {
+        width: 40,
+        height: 40,
+        borderColor: "purple",
+        borderWidth: 1,
+        padding: 2,
+        resizeMode: "contain",
+        borderRadius: 100,
+        marginRight: 5,
     },
     header: {
         display: "flex",
         flexDirection: "row",
+        alignItems: "flex-start",
         color: "purple",
     },
     name: {
