@@ -1,10 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Feed from "./Feed";
 import PostScreen from "./PostScreen";
 const Stack = createStackNavigator();
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Profiles",
+            headerStyle: { backgroundColor: "#1e1e1e" },
+            headerTitleStyle: { color: "green" },
+            headerTintColor: "black",
+            headerShown: false,
+        });
+    }, []);
     return (
         <Stack.Navigator initialRouteName='Feed'>
             <Stack.Screen name='Feed' component={Feed} />

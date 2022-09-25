@@ -2,7 +2,7 @@ import { gql } from "@apollo/client/core";
 
 export default gql`
     query MyQuery {
-        explorePublications(request: { sortCriteria: TOP_COLLECTED }) {
+        explorePublications(request: { sortCriteria:LATEST }) {
             items {
                 ... on Post {
                     id

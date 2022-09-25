@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
@@ -7,7 +7,7 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
     return (
         <View
             style={styles.container}
-            onTouchEndCapture={() => showFullPost(id)}
+            onTouchEndCapture={() => showFullPost(id, Postdata?.profile?.name)}
         >
             <View style={styles.header}>
                 <Image

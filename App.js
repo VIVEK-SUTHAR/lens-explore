@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import WelcomeScreen from "./screens/WelcomeScreen";
@@ -34,7 +32,6 @@ export default function App() {
                                 />
                             );
                         },
-                        headerShown: false,
                         tabBarActiveBackgroundColor: "#1e1e1e",
                         tabBarInactiveBackgroundColor: "#1e1e1e",
                         tabBarActiveTintColor: "lightblue",
