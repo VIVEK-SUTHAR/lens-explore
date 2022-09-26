@@ -8,7 +8,7 @@ export default gql`
             name
             bio
             attributes {
-                displayType
+                displayType 
                 traitType
                 key
                 value

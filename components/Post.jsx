@@ -7,7 +7,9 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
     return (
         <View
             style={styles.container}
-            onTouchEndCapture={() => showFullPost(id, Postdata?.profile?.name)}
+            onTouchEndCapture={() =>
+                showFullPost(Postdata?.id, Postdata?.profile?.name, Postdata)
+            }
         >
             <View style={styles.header}>
                 <Image
