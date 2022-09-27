@@ -6,9 +6,10 @@ const ProfileCard = ({ profile }) => {
         <View style={styles.profileContainer}>
             <Image
                 style={{
-                    width: 50,
-                    height: 50,
+                    width: 75,
+                    height: 75,
                     borderRadius: 50,
+                    resizeMode: "contain",
                 }}
                 source={{
                     uri:
@@ -16,9 +17,38 @@ const ProfileCard = ({ profile }) => {
                         "https://imgs.search.brave.com/-BmioenTWbLsbjE6EQ54mPZWygVqDD2FX6aVKoBz6vw/rs:fit:336:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/YUlNQXVQajVmVF90/T2E0MHFqeWFBQUFB/QSZwaWQ9QXBp",
                 }}
             />
-            <View>
-                <Text>{profile?.handle}</Text>
-                <Text>{profile?.name}</Text>
+            <View style={styles.profileInfo}>
+                <Text style={{ color: "white", fontSize: 18 }}>
+                    @{profile?.handle}
+                </Text>
+                <Text style={{ color: "white" }}>{profile?.name}</Text>
+                <Text style={{ color: "grey",fontSize:12,padding:15 }}>{profile?.bio}</Text>
+            </View>
+            <View style={styles.Stats}>
+                <View style={styles.Box}>
+                    <Text style={styles.TextColor}>Posts</Text>
+                    <Text style={styles.TextColor}>
+                        {profile.stats.totalPosts}
+                    </Text>
+                </View>
+                <View style={styles.Box}>
+                    <Text style={styles.TextColor}>Followers</Text>
+                    <Text style={styles.TextColor}>
+                        {profile.stats.totalFollowers}
+                    </Text>
+                </View>
+                <View style={styles.Box}>
+                    <Text style={styles.TextColor}>Following</Text>
+                    <Text style={styles.TextColor}>
+                        {profile.stats.totalFollowing}
+                    </Text>
+                </View>
+                <View style={styles.Box}>
+                    <Text style={styles.TextColor}>Comments</Text>
+                    <Text style={styles.TextColor}>
+                        {profile.stats.totalComments}
+                    </Text>
+                </View>
             </View>
         </View>
     );
@@ -37,5 +67,27 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+    },
+    profileInfo: {
+        marginVertical: 5,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    TextColor: {
+        color: "white",
+    },
+    Stats: {
+        flexDirection: "row",
+        backgroundColor: "rgba(255,255,255,0.05)",
+        padding: 10,
+        borderRadius: 8,
+    },
+    Box: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: 8,
     },
 });
