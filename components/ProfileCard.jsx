@@ -8,7 +8,7 @@ const ProfileCard = ({ profile }) => {
                 style={{
                     width: 75,
                     height: 75,
-                    borderRadius: 50,
+                    borderRadius: 100,
                     resizeMode: "contain",
                 }}
                 source={{
