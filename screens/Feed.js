@@ -28,13 +28,15 @@ export default function Feed({ navigation }) {
             {data ? (
                 <>
                     {data.explorePublications.items.map((item, index) => {
-                        return (
-                            <Post
-                                key={item.id}
-                                Postdata={item}
-                                showFullPost={showFullPost}
-                            />
-                        );
+                        if (item.__typename === "Post") {
+                            return (
+                                <Post
+                                    key={item.id}
+                                    Postdata={item}
+                                    showFullPost={showFullPost}
+                                />
+                            );
+                        }
                     })}
                 </>
             ) : (

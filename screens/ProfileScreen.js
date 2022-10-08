@@ -7,7 +7,6 @@ import ProfileCard from "../components/ProfileCard";
 
 const ProfileScreen = ({ navigation }) => {
     const { loading, error, data } = useQuery(RecommendedProfiles);
-    console.log(data);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Profiles",

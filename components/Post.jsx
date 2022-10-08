@@ -5,6 +5,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 const Post = ({ Postdata, showFullPost, navigation }) => {
     return (
+    
         <View
             style={styles.container}
             onTouchEndCapture={() =>

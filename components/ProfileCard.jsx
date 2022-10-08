@@ -22,7 +22,9 @@ const ProfileCard = ({ profile }) => {
                     @{profile?.handle}
                 </Text>
                 <Text style={{ color: "white" }}>{profile?.name}</Text>
-                <Text style={{ color: "grey",fontSize:12,padding:15 }}>{profile?.bio}</Text>
+                <Text style={{ color: "grey", fontSize: 12, padding: 15 }}>
+                    {profile?.bio}
+                </Text>
             </View>
             <View style={styles.Stats}>
                 <View style={styles.Box}>
