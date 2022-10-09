@@ -1,18 +1,52 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    Linking,
+    TouchableOpacity,
+} from "react-native";
 import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
+import { useEffect } from "react";
 const Post = ({ Postdata, showFullPost, navigation }) => {
+    // onTouchEndCapture={() =>
+    //                 showFullPost(
+    //                     Postdata?.id,
+    //                     Postdata?.profile?.name,
+    //                     Postdata
+    //                 )
+    //             }
+    var urlPattern =
+        "(https?|ftp)://(www\\.)?(((([a-zA-Z0-9.-]+\\.){1,}[a-zA-Z]{2,4}|localhost))|((\\d{1,3}\\.){3}(\\d{1,3})))(:(\\d+))?(/([a-zA-Z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?(\\?([a-zA-Z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*)?(#([a-zA-Z0-9._-]|%[0-9A-F]{2})*)?";
+    function extractURLs(s) {
+        let string = s.match(new RegExp(urlPattern, "g"));
+        // let Final = s.replace(
+        //     string,
+        //     `<Text style={{color:'blue',textDecorationLine:'underline'}}>${string}</Text>`
+        // );
+        // console.log(string);
+        return (
+            <Text
+                style={{ color: "lightblue" }}
+                onPress={e => {
+                    e.stopPropagation();
+                    Linking.openURL(string[0]);
+                }}
+            >
+                {string}
+            </Text>
+        );
+    }
     return (
-    
-        <View
-            style={styles.container}
-            onTouchEndCapture={() =>
-                showFullPost(Postdata?.id, Postdata?.profile?.name, Postdata)
-            }
-        >
-            <View style={styles.header}>
+        <View style={styles.container}>
+            <View
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                }}
+            >
                 <Image
                     style={styles.avatar}
                     source={{
@@ -21,8 +55,18 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                             "https://i.pravatar.cc/300",
                     }}
                 />
-                <Text style={styles.name}>{Postdata.profile?.name}</Text>
-                <Text style={styles.text}>@{Postdata.profile?.handle}</Text>
+                <TouchableOpacity>
+                    <View
+                        style={{ flexDirection: "column", marginHorizontal: 2 }}
+                    >
+                        <Text style={{ color: "green", fontSize: 18 }}>
+                            {Postdata?.profile?.name}
+                        </Text>
+                        <Text style={{ color: "gray", fontSize: 16 }}>
+                            @{Postdata?.profile?.handle}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
             <View>
                 <Text
@@ -33,14 +77,23 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                     }}
                 >
                     {Postdata?.metadata?.content}
+                    {extractURLs(Postdata?.metadata?.content)}
                 </Text>
                 {Postdata?.metadata?.image ? (
-                    <Image
-                        source={{
-                            uri: Postdata?.metadata?.image,
+                    <View
+                        style={{
+                            backgroundColor: "lightcoral",
+                            height: 220,
+                            borderRadius: 10,
                         }}
-                        style={styles.image}
-                    />
+                    >
+                        <Image
+                            source={{
+                                uri: Postdata?.metadata?.image,
+                            }}
+                            style={styles.image}
+                        />
+                    </View>
                 ) : (
                     <></>
                 )}
@@ -48,29 +101,19 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
             <View style={styles.statscontainer}>
                 <View style={styles.stats}>
                     <AntDesign name='arrowup' size={15} color={"lightblue"} />
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "white", marginHorizontal: 6 }}>
                         {Postdata?.stats?.totalUpvotes}
                     </Text>
                 </View>
                 <View style={styles.stats}>
-                    <AntDesign
-                        name='arrowdown'
-                        size={15}
-                        color={"lightgreen"}
-                    />
-                    <Text style={{ color: "white" }}>
-                        {Postdata?.stats?.totalDownvotes}
-                    </Text>
-                </View>
-                <View style={styles.stats}>
                     <EvilIcons name='comment' size={18} color={"pink"} />
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "white", marginHorizontal: 6 }}>
                         {Postdata?.stats?.totalAmountOfComments}
                     </Text>
                 </View>
                 <View style={styles.stats}>
                     <AntDesign name='swap' size={15} color={"red"} />
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "white", marginHorizontal: 6 }}>
                         {Postdata?.stats?.totalAmountOfMirrors}
                     </Text>
                 </View>
@@ -88,12 +131,12 @@ const styles = StyleSheet.create({
         padding: 10,
         display: "flex",
         flexDirection: "column",
+        borderRadius: 15,
+        marginHorizontal: 6,
     },
     avatar: {
-        width: 40,
-        height: 40,
-        borderColor: "purple",
-        borderWidth: 1,
+        width: 55,
+        height: 55,
         padding: 2,
         resizeMode: "contain",
         borderRadius: 100,
@@ -118,9 +161,8 @@ const styles = StyleSheet.create({
     statscontainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-around",
-        backgroundColor: "rgba(255,255,255,0.05)",
-        // padding: 6,
+        justifyContent: "space-between",
+        paddingHorizontal: 10,
         paddingVertical: 8,
         borderRadius: 8,
         marginVertical: 4,
@@ -132,9 +174,8 @@ const styles = StyleSheet.create({
     },
     image: {
         width: "100%",
-        height: 220,
+        height: "100%",
         borderRadius: 10,
-        marginBottom: 5,
         resizeMode: "contain",
     },
 });

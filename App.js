@@ -4,6 +4,9 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { StyleSheet, View } from "react-native";
+import { BlurView } from "expo-blur";
+
 const Tab = createBottomTabNavigator();
 const client = new ApolloClient({
     uri: "https://api.lens.dev",
@@ -20,7 +23,7 @@ export default function App() {
                         tabBarIcon: ({ color, size }) => {
                             let iconName;
                             if (route.name === "Home") {
-                                iconName = "feed";
+                                iconName = "home";
                             } else if (route.name === "Profiles") {
                                 iconName = "group";
                             }
@@ -32,10 +35,14 @@ export default function App() {
                                 />
                             );
                         },
-                        tabBarActiveBackgroundColor: "#1e1e1e",
-                        tabBarInactiveBackgroundColor: "#1e1e1e",
-                        tabBarActiveTintColor: "lightblue",
-                        tabBarInactiveTintColor: "gray",
+                        tabBarStyle: { position: "absolute" },
+                        tabBarBackground: () => (
+                            <BlurView
+                                tint='dark'
+                                intensity={500}
+                                style={StyleSheet.absoluteFill}
+                            />
+                        ),
                     })}
                 >
                     <Tab.Screen name='Home' component={WelcomeScreen} />

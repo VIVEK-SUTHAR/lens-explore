@@ -1,12 +1,20 @@
-import { Text, StyleSheet, ScrollView } from "react-native";
-import React, { useLayoutEffect } from "react";
+import { Text, StyleSheet, ScrollView, RefreshControl } from "react-native";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useQuery } from "@apollo/client";
-
 import LatestPost from "../query/LatestPost";
 import Post from "../components/Post";
 export default function Feed({ navigation }) {
-    const { loading, error, data } = useQuery(LatestPost);
+    const [refreshing, setRefreshing] = useState(false);
+    const wait = timeout => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    };
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+
+    var { loading, error, data } = useQuery(LatestPost);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Explore Lens",
@@ -22,8 +30,14 @@ export default function Feed({ navigation }) {
             post: post,
         });
     };
+
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        >
             <StatusBar style='light' />
             {data ? (
                 <>

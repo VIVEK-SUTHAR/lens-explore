@@ -6,10 +6,25 @@ const ProfileCard = ({ profile }) => {
         <View style={styles.profileContainer}>
             <Image
                 style={{
+                    width:330,
+                    height: 100,
+                    borderTopLeftRadius: 5,
+                    borderTopRightRadius: 5,
+                    resizeMode:"contain"
+                }}
+                source={{
+                    uri:
+                        profile?.coverPicture?.original?.url ||
+                        "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
+                }}
+            />
+            <Image
+                style={{
                     width: 75,
                     height: 75,
-                    borderRadius: 100,
+                    borderRadius: 500,
                     resizeMode: "contain",
+                    marginTop:-45
                 }}
                 source={{
                     uri:
@@ -63,9 +78,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#2d2d2d",
         marginVertical: 5,
         borderRadius: 5,
-        padding: 10,
         marginHorizontal: 15,
         display: "flex",
+        paddingBottom:5,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
