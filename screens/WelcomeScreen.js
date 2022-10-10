@@ -3,6 +3,7 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Feed from "./Feed";
 import PostScreen from "./PostScreen";
+import SingleProfilePage from "./SingleProfilePage";
 const Stack = createStackNavigator();
 const WelcomeScreen = ({ navigation }) => {
     useLayoutEffect(() => {

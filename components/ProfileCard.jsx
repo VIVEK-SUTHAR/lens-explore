@@ -1,16 +1,20 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
-
-const ProfileCard = ({ profile }) => {
+const ProfileCard = ({ profile, navigation, showFullProfile }) => {
     return (
-        <View style={styles.profileContainer}>
+        <View
+            style={styles.profileContainer}
+            onTouchEndCapture={() => {
+                showFullProfile(profile);
+            }}
+        >
             <Image
                 style={{
-                    width:330,
+                    width: 330,
                     height: 100,
                     borderTopLeftRadius: 5,
                     borderTopRightRadius: 5,
-                    resizeMode:"contain"
+                    resizeMode: "contain",
                 }}
                 source={{
                     uri:
@@ -24,7 +28,7 @@ const ProfileCard = ({ profile }) => {
                     height: 75,
                     borderRadius: 500,
                     resizeMode: "contain",
-                    marginTop:-45
+                    marginTop: -45,
                 }}
                 source={{
                     uri:
@@ -60,12 +64,6 @@ const ProfileCard = ({ profile }) => {
                         {profile.stats.totalFollowing}
                     </Text>
                 </View>
-                <View style={styles.Box}>
-                    <Text style={styles.TextColor}>Comments</Text>
-                    <Text style={styles.TextColor}>
-                        {profile.stats.totalComments}
-                    </Text>
-                </View>
             </View>
         </View>
     );
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginHorizontal: 15,
         display: "flex",
-        paddingBottom:5,
+        paddingBottom: 5,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",

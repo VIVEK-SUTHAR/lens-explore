@@ -11,13 +11,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 import { useEffect } from "react";
 const Post = ({ Postdata, showFullPost, navigation }) => {
-    // onTouchEndCapture={() =>
-    //                 showFullPost(
-    //                     Postdata?.id,
-    //                     Postdata?.profile?.name,
-    //                     Postdata
-    //                 )
-    //             }
+    
     var urlPattern =
         "(https?|ftp)://(www\\.)?(((([a-zA-Z0-9.-]+\\.){1,}[a-zA-Z]{2,4}|localhost))|((\\d{1,3}\\.){3}(\\d{1,3})))(:(\\d+))?(/([a-zA-Z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?(\\?([a-zA-Z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*)?(#([a-zA-Z0-9._-]|%[0-9A-F]{2})*)?";
     function extractURLs(s) {
@@ -68,7 +62,15 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <View>
+            <View
+                onTouchEndCapture={() =>
+                    showFullPost(
+                        Postdata?.id,
+                        Postdata?.profile?.name,
+                        Postdata
+                    )
+                }
+            >
                 <Text
                     style={{
                         color: "white",
