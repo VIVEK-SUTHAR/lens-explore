@@ -42,11 +42,12 @@ const ProfileFeed = ({ navigation }) => {
         });
     }, []);
 
-    const showFullProfile = (profile) => {
+    const showFullProfile = (profile, id) => {
         navigation.navigate("SingleProfileScreen", {
-            profile:profile
+            profile: profile,
+            id: id,
         });
-    }
+    };
 
     return (
         <ScrollView style={styles.container}>

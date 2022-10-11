@@ -5,7 +5,7 @@ const ProfileCard = ({ profile, navigation, showFullProfile }) => {
         <View
             style={styles.profileContainer}
             onTouchEndCapture={() => {
-                showFullProfile(profile);
+                showFullProfile(profile,profile.id);
             }}
         >
             <Image

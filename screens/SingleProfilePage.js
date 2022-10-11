@@ -1,21 +1,41 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-
+import FetchProfileQuery from "../query/FetchProfileQuery";
+import { useQuery } from "@apollo/client";
+import Post from "../components/Post";
 const SingleProfilePage = ({ navigation, route }) => {
+    console.log(route.params.id);
     const [profile, setProfile] = useState(null);
+    const [YPOint, setYPOint] = useState(0);
     useEffect(() => {
         setProfile(route.params.profile);
     }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: route.params.profile?.name,
-            headerStyle: { backgroundColor: "#1e1e1e" },
+            headerStyle: {
+                backgroundColor: YPOint >= 158 ? "lightgreen" : "#2d2d2d",
+            },
             headerTitleStyle: { color: "green" },
             headerTintColor: "white",
         });
-    }, []);
+    }, [YPOint]);
+    const { loading, error, data } = useQuery(FetchProfileQuery, {
+        variables: {
+            request: { profileId: route.params.id },
+            publicationsRequest: {
+                profileId: route.params.id,
+                publicationTypes: ["POST"],
+            },
+        },
+    });
+    const handleHeaderAnimation = event => {
+        console.log(event.nativeEvent.contentOffset.y);
+        setYPOint(parseInt(event.nativeEvent.contentOffset.y));
+    };
+    console.log(data?.publications);
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} onScroll={handleHeaderAnimation}>
             <View style={{ alignSelf: "stretch" }}>
                 <Image
                     style={{
@@ -81,6 +101,26 @@ const SingleProfilePage = ({ navigation, route }) => {
                 </Text>
             </View>
             <View>
+                <Text
+                    style={{
+                        color: "white",
+                        fontSize: 24,
+                        marginHorizontal: 20,
+                    }}
+                >
+                    {" "}
+                    Posts By {profile?.name}
+                </Text>
+                {!data && (
+                    <View>
+                        <Text style={{ color: "white", fontSize: 24 }}>
+                            Getting All Posts of {profile?.name}
+                        </Text>
+                    </View>
+                )}
+                {data?.publications?.items.map((post, idx) => {
+                    return <Post key={idx} Postdata={post} />;
+                })}
             </View>
         </ScrollView>
     );
@@ -90,7 +130,7 @@ export default SingleProfilePage;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#2d2d2d",
+        backgroundColor: "#1e1e1e",
         flex: 1,
     },
 });
