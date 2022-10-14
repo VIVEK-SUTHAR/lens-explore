@@ -39,7 +39,7 @@ export default function App() {
                         tabBarBackground: () => (
                             <BlurView
                                 tint='dark'
-                                intensity={500}
+                                intensity={120}
                                 style={StyleSheet.absoluteFill}
                             />
                         ),

@@ -130,7 +130,7 @@ export default SingleProfilePage;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#1e1e1e",
+        backgroundColor: "black",
         flex: 1,
     },
 });

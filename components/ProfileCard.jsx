@@ -1,16 +1,17 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Avatar from "./Avatar";
 const ProfileCard = ({ profile, navigation, showFullProfile }) => {
     return (
         <View
             style={styles.profileContainer}
             onTouchEndCapture={() => {
-                showFullProfile(profile,profile.id);
+                showFullProfile(profile, profile.id);
             }}
         >
             <Image
                 style={{
-                    width: 330,
+                    width: "100%",
                     height: 100,
                     borderTopLeftRadius: 5,
                     borderTopRightRadius: 5,
@@ -22,20 +23,7 @@ const ProfileCard = ({ profile, navigation, showFullProfile }) => {
                         "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
                 }}
             />
-            <Image
-                style={{
-                    width: 75,
-                    height: 75,
-                    borderRadius: 500,
-                    resizeMode: "contain",
-                    marginTop: -45,
-                }}
-                source={{
-                    uri:
-                        profile?.picture?.original?.url ||
-                        "https://imgs.search.brave.com/-BmioenTWbLsbjE6EQ54mPZWygVqDD2FX6aVKoBz6vw/rs:fit:336:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/YUlNQXVQajVmVF90/T2E0MHFqeWFBQUFB/QSZwaWQ9QXBp",
-                }}
-            />
+            <Avatar src={profile?.picture?.original?.url} mt={-45} size={80} />
             <View style={styles.profileInfo}>
                 <Text style={{ color: "white", fontSize: 18 }}>
                     @{profile?.handle}
@@ -73,15 +61,15 @@ export default ProfileCard;
 
 const styles = StyleSheet.create({
     profileContainer: {
-        backgroundColor: "#2d2d2d",
-        marginVertical: 5,
-        borderRadius: 5,
-        marginHorizontal: 15,
+        backgroundColor: "#1a1a1a",
         display: "flex",
         paddingBottom: 5,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        borderColor: "#F5F8FA",
+        borderTopWidth: 0.18,
+        borderWidth: 0.18,
     },
     profileInfo: {
         marginVertical: 5,

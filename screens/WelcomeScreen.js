@@ -9,7 +9,7 @@ const WelcomeScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Profiles",
-            headerStyle: { backgroundColor: "#1e1e1e" },
+            headerStyle: { backgroundColor: "black" },
             headerTitleStyle: { color: "green" },
             headerTintColor: "black",
             headerShown: false,

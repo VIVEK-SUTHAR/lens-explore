@@ -5,33 +5,51 @@ import {
     Linking,
     TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 import { useEffect } from "react";
+import Avatar from "./Avatar";
 const Post = ({ Postdata, showFullPost, navigation }) => {
-    
+    const [data, setData] = useState("");
     var urlPattern =
         "(https?|ftp)://(www\\.)?(((([a-zA-Z0-9.-]+\\.){1,}[a-zA-Z]{2,4}|localhost))|((\\d{1,3}\\.){3}(\\d{1,3})))(:(\\d+))?(/([a-zA-Z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?(\\?([a-zA-Z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*)?(#([a-zA-Z0-9._-]|%[0-9A-F]{2})*)?";
-    function extractURLs(s) {
-        let string = s.match(new RegExp(urlPattern, "g"));
-        // let Final = s.replace(
-        //     string,
-        //     `<Text style={{color:'blue',textDecorationLine:'underline'}}>${string}</Text>`
-        // );
-        // console.log(string);
-        return (
-            <Text
-                style={{ color: "lightblue" }}
-                onPress={e => {
-                    e.stopPropagation();
-                    Linking.openURL(string[0]);
-                }}
-            >
-                {string}
-            </Text>
-        );
+    const HASHTAG_FORMATTER = string => {
+        return string
+            .split(/((?:^|\s)(?:#[a-z\d-]+))/gi)
+            .filter(Boolean)
+            .map((v, index) => {
+                if (v.includes("#")) {
+                    return (
+                        <Text
+                            key={index}
+                            style={{ color: "yellow", fontWeight: "500" }}
+                        >
+                            {v}
+                        </Text>
+                    );
+                } else {
+                    return <Text key={index}>{v}</Text>;
+                }
+            });
+    };
+
+    function extractURLs(txt) {
+        const URL_REGEX =
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+
+        const renderText = txt =>
+            txt
+                .split(" ")
+                .map(part =>
+                    URL_REGEX.test(part) ? (
+                        <Text style={{ color: "lightblue" }}>{part} </Text>
+                    ) : (
+                        part + " "
+                    )
+                );
+        return renderText(txt);
     }
     return (
         <View style={styles.container}>
@@ -41,14 +59,14 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                     flexDirection: "row",
                 }}
             >
-                <Image
-                    style={styles.avatar}
-                    source={{
-                        uri:
-                            Postdata?.profile?.picture?.original?.url ||
-                            "https://i.pravatar.cc/300",
-                    }}
-                />
+                <TouchableOpacity>
+                    <Avatar
+                        src={Postdata?.profile?.picture?.original?.url}
+                        mx={4}
+                        p={2}
+                        size={60}
+                    />
+                </TouchableOpacity>
                 <TouchableOpacity>
                     <View
                         style={{ flexDirection: "column", marginHorizontal: 2 }}
@@ -62,44 +80,47 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <View
-                onTouchEndCapture={() =>
-                    showFullPost(
-                        Postdata?.id,
-                        Postdata?.profile?.name,
-                        Postdata
-                    )
-                }
-            >
-                <Text
-                    style={{
-                        color: "white",
-                        fontSize: 15,
-                        marginVertical: 10,
-                    }}
+            <TouchableOpacity>
+                <View
+                    onTouchEndCapture={() =>
+                        showFullPost(
+                            Postdata?.id,
+                            Postdata?.profile?.name,
+                            Postdata
+                        )
+                    }
                 >
-                    {Postdata?.metadata?.content}
-                    {extractURLs(Postdata?.metadata?.content)}
-                </Text>
-                {Postdata?.metadata?.image ? (
-                    <View
+                    <Text
                         style={{
-                            backgroundColor: "lightcoral",
-                            height: 220,
-                            borderRadius: 10,
+                            color: "white",
+                            fontSize: 15,
+                            marginVertical: 10,
                         }}
                     >
-                        <Image
-                            source={{
-                                uri: Postdata?.metadata?.image,
+                        {/* {Postdata?.metadata?.content} */}
+                        {extractURLs(Postdata?.metadata?.content)}
+                        {HASHTAG_FORMATTER(Postdata?.metadata?.content)}
+                    </Text>
+                    {Postdata?.metadata?.image ? (
+                        <View
+                            style={{
+                                backgroundColor: "lightcoral",
+                                height: 220,
+                                borderRadius: 10,
                             }}
-                            style={styles.image}
-                        />
-                    </View>
-                ) : (
-                    <></>
-                )}
-            </View>
+                        >
+                            <Image
+                                source={{
+                                    uri: Postdata?.metadata?.image,
+                                }}
+                                style={styles.image}
+                            />
+                        </View>
+                    ) : (
+                        <></>
+                    )}
+                </View>
+            </TouchableOpacity>
             <View style={styles.statscontainer}>
                 <View style={styles.stats}>
                     <AntDesign name='arrowup' size={15} color={"lightblue"} />
@@ -128,21 +149,18 @@ export default Post;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#2d2d2d",
-        marginVertical: 5,
-        padding: 10,
+        backgroundColor: "#1a1a1a",
+        paddingVertical: 15,
+        paddingHorizontal: "4%",
         display: "flex",
         flexDirection: "column",
-        borderRadius: 15,
-        marginHorizontal: 6,
-    },
-    avatar: {
-        width: 55,
-        height: 55,
-        padding: 2,
-        resizeMode: "contain",
-        borderRadius: 100,
-        marginRight: 5,
+        borderBottomColor: "#F5F8FA",
+        borderTopColor: "#F5F8FA",
+        borderBottomWidth: 0.18,
+        borderColor: "#F5F8FA",
+        borderTopWidth: 0.18,
+        borderWidth: 0.18,
+        borderRadius: 2,
     },
     header: {
         display: "flex",
