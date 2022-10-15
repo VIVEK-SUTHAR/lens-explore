@@ -31,6 +31,13 @@ export default function Feed({ navigation }) {
         });
     };
 
+    const goToUserProfile = (id, profile) => {
+        navigation.navigate("SingleProfilecreen", {
+            id: id,
+            profile: profile,
+        });
+    };
+
     return (
         <ScrollView
             style={styles.container}
@@ -48,6 +55,7 @@ export default function Feed({ navigation }) {
                                     key={item.id}
                                     Postdata={item}
                                     showFullPost={showFullPost}
+                                    goToUserProfile={goToUserProfile}
                                 />
                             );
                         }

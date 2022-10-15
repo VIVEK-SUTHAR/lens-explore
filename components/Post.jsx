@@ -4,6 +4,7 @@ import {
     View,
     Linking,
     TouchableOpacity,
+    Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -11,7 +12,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 import { useEffect } from "react";
 import Avatar from "./Avatar";
-const Post = ({ Postdata, showFullPost, navigation }) => {
+const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
     const [data, setData] = useState("");
     var urlPattern =
         "(https?|ftp)://(www\\.)?(((([a-zA-Z0-9.-]+\\.){1,}[a-zA-Z]{2,4}|localhost))|((\\d{1,3}\\.){3}(\\d{1,3})))(:(\\d+))?(/([a-zA-Z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?(\\?([a-zA-Z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*)?(#([a-zA-Z0-9._-]|%[0-9A-F]{2})*)?";
@@ -40,15 +41,15 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
             /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
         const renderText = txt =>
-            txt
-                .split(" ")
-                .map(part =>
-                    URL_REGEX.test(part) ? (
-                        <Text style={{ color: "lightblue" }}>{part} </Text>
-                    ) : (
-                        part + " "
-                    )
-                );
+            txt.split(" ").map((part, index) =>
+                URL_REGEX.test(part) ? (
+                    <Text key={index} style={{ color: "lightblue" }}>
+                        {part}{" "}
+                    </Text>
+                ) : (
+                    part + " "
+                )
+            );
         return renderText(txt);
     }
     return (
@@ -59,7 +60,12 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                     flexDirection: "row",
                 }}
             >
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onTouchEndCapture={() => {
+                        console.log("hi");
+                        goToUserProfile(Postdata?.id, Postdata?.profile);
+                    }}
+                >
                     <Avatar
                         src={Postdata?.profile?.picture?.original?.url}
                         mx={4}
@@ -69,7 +75,14 @@ const Post = ({ Postdata, showFullPost, navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View
-                        style={{ flexDirection: "column", marginHorizontal: 2 }}
+                        onTouchEndCapture={() => {
+                            console.log("hi");
+                            goToUserProfile(Postdata?.id, Postdata?.profile);
+                        }}
+                        style={{
+                            flexDirection: "column",
+                            marginHorizontal: 2,
+                        }}
                     >
                         <Text style={{ color: "green", fontSize: 18 }}>
                             {Postdata?.profile?.name}

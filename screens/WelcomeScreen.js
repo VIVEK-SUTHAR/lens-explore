@@ -19,6 +19,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Stack.Navigator initialRouteName='Feed'>
             <Stack.Screen name='Feed' component={Feed} />
             <Stack.Screen name='PostScreen' component={PostScreen} />
+            <Stack.Screen name="SingleProfilecreen" component={SingleProfilePage}/>
         </Stack.Navigator>
     );
 };

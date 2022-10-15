@@ -4,7 +4,7 @@ import FetchProfileQuery from "../query/FetchProfileQuery";
 import { useQuery } from "@apollo/client";
 import Post from "../components/Post";
 const SingleProfilePage = ({ navigation, route }) => {
-    console.log(route.params.id);
+    console.log(route.params.profile.id);
     const [profile, setProfile] = useState(null);
     const [YPOint, setYPOint] = useState(0);
     useEffect(() => {
@@ -22,9 +22,9 @@ const SingleProfilePage = ({ navigation, route }) => {
     }, [YPOint]);
     const { loading, error, data } = useQuery(FetchProfileQuery, {
         variables: {
-            request: { profileId: route.params.id },
+            request: { profileId: route.params.profile.id },
             publicationsRequest: {
-                profileId: route.params.id,
+                profileId: route.params.profile.id,
                 publicationTypes: ["POST"],
             },
         },
@@ -94,10 +94,10 @@ const SingleProfilePage = ({ navigation, route }) => {
                 }}
             >
                 <Text style={{ color: "aliceblue", fontSize: 14 }}>
-                    Followers : {profile?.stats.totalFollowers}
+                    Followers : {profile?.stats?.totalFollowers}
                 </Text>
                 <Text style={{ color: "aliceblue", fontSize: 14 }}>
-                    Following :{profile?.stats.totalFollowing}
+                    Following :{profile?.stats?.totalFollowing}
                 </Text>
             </View>
             <View>
