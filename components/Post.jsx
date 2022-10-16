@@ -6,17 +6,18 @@ import {
     TouchableOpacity,
     Pressable,
 } from "react-native";
-import React, { useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
-import { useEffect } from "react";
 import Avatar from "./Avatar";
 const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
-    const [data, setData] = useState("");
-    var urlPattern =
-        "(https?|ftp)://(www\\.)?(((([a-zA-Z0-9.-]+\\.){1,}[a-zA-Z]{2,4}|localhost))|((\\d{1,3}\\.){3}(\\d{1,3})))(:(\\d+))?(/([a-zA-Z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?(\\?([a-zA-Z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*)?(#([a-zA-Z0-9._-]|%[0-9A-F]{2})*)?";
+    function getFormattedPostContent(POST_TEXT) {
+        let postwithurls = extractURLs(POST_TEXT);
+        // let Post_Text_With_HasTags = HASHTAG_FORMATTER(String(dara.join("")));
+        return postwithurls;
+    }
     const HASHTAG_FORMATTER = string => {
+        // console.log(string);
         return string
             .split(/((?:^|\s)(?:#[a-z\d-]+))/gi)
             .filter(Boolean)
@@ -111,8 +112,9 @@ const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
                         }}
                     >
                         {/* {Postdata?.metadata?.content} */}
-                        {extractURLs(Postdata?.metadata?.content)}
-                        {HASHTAG_FORMATTER(Postdata?.metadata?.content)}
+                        {/* {extractURLs(Postdata?.metadata?.content)} */}
+                        {/* {HASHTAG_FORMATTER(Postdata?.metadata?.content)} */}
+                        {getFormattedPostContent(Postdata?.metadata?.content)}
                     </Text>
                     {Postdata?.metadata?.image ? (
                         <View

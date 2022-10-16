@@ -13,6 +13,32 @@ const PostScreen = ({ navigation, route }) => {
         });
     }, []);
     const post = route.params.post;
+    console.log(post?.createdAt);
+    function convertDate(timestamp) {
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sept",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
+        const dateObj = new Date(timestamp);
+        const hour = dateObj.getUTCHours();
+        const minute = dateObj.getUTCMinutes();
+        const month = dateObj.getMonth();
+        let date = dateObj.getDate();
+        console.log(date, hour, minute, months[month]);
+        return `At ${hour}:${minute} - ${date} ${
+            months[month]
+        } ${dateObj.getFullYear()} `;
+    }
     return (
         <View style={styles.container}>
             <View
@@ -44,18 +70,38 @@ const PostScreen = ({ navigation, route }) => {
             </View>
             <View
                 style={{
-                    padding: 5,
+                    padding: 8,
+                    borderBottomColor: "#F5F8FA",
+                    borderBottomWidth: 0.2,
                 }}
             >
                 <Text
                     style={{
-                        fontSize: 18,
+                        fontSize: 22,
+                        letterSpacing: 0.5,
                         color: "aliceblue",
                         fontWeight: "400",
+                        paddingHorizontal: 10,
                     }}
                 >
                     {post?.metadata?.content}
                 </Text>
+            </View>
+            <View
+                style={{
+                    borderBottomColor: "#F5F8FA",
+                    borderBottomWidth: 0.2,
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems:"center",
+                    padding: 12,
+                }}
+            >
+                <Text style={{ color: "white",fontSize:16 }}>
+                    {convertDate(post?.createdAt)}
+                </Text>
+                
+                <Text style={{ color: "lightgreen",fontSize:14,fontWeight:"600" }}>{post?.appId.toUpperCase()}</Text>
             </View>
         </View>
     );
@@ -68,6 +114,5 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#1e1e1e",
         paddingVertical: 10,
-        paddingHorizontal: 10,
     },
 });
