@@ -1,9 +1,18 @@
-import { Text, StyleSheet, ScrollView, RefreshControl } from "react-native";
+import {
+    Text,
+    StyleSheet,
+    ScrollView,
+    RefreshControl,
+    View,
+    TouchableOpacity,
+} from "react-native";
 import React, { useCallback, useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useQuery } from "@apollo/client";
 import LatestPost from "../query/LatestPost";
 import Post from "../components/Post";
+import Avatar from "../components/Avatar";
+import { Button } from "react-native-elements";
 export default function Feed({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
     const wait = timeout => {
@@ -17,10 +26,24 @@ export default function Feed({ navigation }) {
     var { loading, error, data } = useQuery(LatestPost);
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Explore Lens",
+            title: "DIve into Feed",
             headerStyle: { backgroundColor: "#1e1e1e" },
-            headerTitleStyle: { color: "green" },
+            headerTitleStyle: { color: "white" },
             headerTintColor: "black",
+            headerRight: () => (
+                <Button
+                    title={"Connect Wallet"}
+                    type='outline'
+                    
+                    buttonStyle={{
+                        marginHorizontal: 10,
+                        borderColor: "white",
+                        borderWidth: 1,
+                        borderRadius: 10,
+                    }}
+                >
+                </Button>
+            ),
         });
     }, [navigation]);
     const showFullPost = (id, title, post) => {
@@ -69,7 +92,7 @@ export default function Feed({ navigation }) {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         backgroundColor: "black",
     },
 });

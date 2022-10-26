@@ -10,7 +10,7 @@ const Avatar = ({ src, size, mt, mx, p }) => {
         >
             <Image
                 style={{
-                    height: size ? size : 55,
+                    height: size ? size : 45,
                     marginRight: mx ? mx : 8,
                     width: size ? size : 55,
                     borderRadius: 100,
