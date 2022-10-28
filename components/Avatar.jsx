@@ -14,7 +14,6 @@ const Avatar = ({ src, size, mt, mx, p }) => {
                     marginRight: mx ? mx : 8,
                     width: size ? size : 55,
                     borderRadius: 100,
-                    borderWidth: 2,
                     padding: p ? p : 4,
                     borderColor: "white",
                     marginTop: mt ? mt : 0,

@@ -11,9 +11,10 @@ const Stack = createStackNavigator();
 const ProfileScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Profiles",
             headerStyle: { backgroundColor: "#1e1e1e" },
-            headerTitleStyle: { color: "green" },
+            headerTitleStyle: { color: "white" },
+            headerTintColor: "black",
+            title: "Profiles",
             headerTintColor: "black",
             headerShown: false,
         });
@@ -39,6 +40,9 @@ const ProfileFeed = ({ navigation }) => {
             headerTitleStyle: { color: "green" },
             headerTintColor: "black",
             headerShown: true,
+            headerStyle: { backgroundColor: "#1e1e1e" },
+            headerTitleStyle: { color: "white" },
+            headerTintColor: "black",
         });
     }, []);
 

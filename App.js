@@ -6,6 +6,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { StyleSheet, View } from "react-native";
 import { BlurView } from "expo-blur";
+import UserProfile from "./screens/UserProfile";
 
 const Tab = createBottomTabNavigator();
 const client = new ApolloClient({
@@ -26,6 +27,8 @@ export default function App() {
                                 iconName = "home";
                             } else if (route.name === "Profiles") {
                                 iconName = "group";
+                            } else if (route.name === "Account") {
+                                iconName = "user";
                             }
                             return (
                                 <FontAwesome
@@ -35,18 +38,19 @@ export default function App() {
                                 />
                             );
                         },
-                        tabBarStyle: { position: "absolute" },
-                        tabBarBackground: () => (
-                            <BlurView
-                                tint='dark'
-                                intensity={120}
-                                style={StyleSheet.absoluteFill}
-                            />
-                        ),
+                        tabBarStyle: {
+                            position: "absolute",
+                            backgroundColor: "#2d2d2d",
+                            marginHorizontal: 15,
+                            marginVertical: 20,
+                            borderRadius: 40,
+                            borderColor: "#2d2d2d",
+                        },
                     })}
                 >
                     <Tab.Screen name='Home' component={WelcomeScreen} />
                     <Tab.Screen name='Profiles' component={ProfileScreen} />
+                    <Tab.Screen name='Account' component={UserProfile} />
                 </Tab.Navigator>
             </NavigationContainer>
         </ApolloProvider>

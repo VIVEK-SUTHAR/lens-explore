@@ -13,6 +13,7 @@ import LatestPost from "../query/LatestPost";
 import Post from "../components/Post";
 import Avatar from "../components/Avatar";
 import { Button } from "react-native-elements";
+import Loader from "../components/Loader";
 export default function Feed({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
     const wait = timeout => {
@@ -22,11 +23,13 @@ export default function Feed({ navigation }) {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
-
+    
     var { loading, error, data } = useQuery(LatestPost);
+    
+    
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "DIve into Feed",
+            title: "Dive into Feed",
             headerStyle: { backgroundColor: "#1e1e1e" },
             headerTitleStyle: { color: "white" },
             headerTintColor: "black",
@@ -34,15 +37,13 @@ export default function Feed({ navigation }) {
                 <Button
                     title={"Connect Wallet"}
                     type='outline'
-                    
                     buttonStyle={{
                         marginHorizontal: 10,
                         borderColor: "white",
                         borderWidth: 1,
                         borderRadius: 10,
                     }}
-                >
-                </Button>
+                ></Button>
             ),
         });
     }, [navigation]);
@@ -85,7 +86,7 @@ export default function Feed({ navigation }) {
                     })}
                 </>
             ) : (
-                <Text>Gettiny</Text>
+                <Loader/>
             )}
         </ScrollView>
     );
@@ -93,6 +94,6 @@ export default function Feed({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 2,
-        backgroundColor: "black",
+        backgroundColor: "#1a1a1a",
     },
 });
