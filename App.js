@@ -41,10 +41,10 @@ export default function App() {
                         tabBarStyle: {
                             position: "absolute",
                             backgroundColor: "#2d2d2d",
-                            // marginHorizontal: 15,
+                            marginHorizontal: 15,
                             // paddingVertical:2,
                             // marginVertical: 20,
-                            // borderRadius: 20,
+                            borderRadius: 20,
                             
                         },
                     })}

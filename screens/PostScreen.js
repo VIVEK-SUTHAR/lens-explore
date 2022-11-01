@@ -1,8 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useEffect } from "react";
 import { useLayoutEffect } from "react";
 import Avatar from "../components/Avatar";
 import { SafeAreaView } from "react-native";
+import { Icon } from "react-native-elements";
+import Post from "../components/Post";
 
 const PostScreen = ({ navigation, route }) => {
     useEffect(() => {
@@ -63,7 +65,7 @@ const PostScreen = ({ navigation, route }) => {
         <>
             <SafeAreaView style={styles.container}>
                 <ScrollView>
-                    <View
+                    {/* <View
                         style={{
                             flexDirection: "row",
                             marginHorizontal: 10,
@@ -136,22 +138,34 @@ const PostScreen = ({ navigation, route }) => {
                         >
                             {post?.appId.toUpperCase()}
                         </Text>
-                    </View>
+                    </View> */}
+                    <Post Postdata={post}/>
                 </ScrollView>
             </SafeAreaView>
-            <View>
-                <Text
+            <View
+                style={{
+                    position: "absolute",
+                    bottom: 0,
+                    minHeight: 50,
+                    backgroundColor: "#2d2d2d",
+                    width: "100%",
+                    paddingHorizontal: 10,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}
+            >
+                <Avatar size={40} mx={0} />
+                <TextInput
+                    placeholder='Write your thoughts'
+                    cursorColor={"white"}
+                    placeholderTextColor='white'
                     style={{
-                        position: "absolute",
-                        bottom: 0,
-                        minHeight: 60,
-                        backgroundColor: "red",
-                        width: "100%",
-                        zIndex: 100000,
+                        color: "white",
+                        flex: 1,
                     }}
-                >
-                    HI
-                </Text>
+                />
+                <Icon name='send' color={"white"} size={28} />
             </View>
         </>
     );
@@ -163,7 +177,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         flex: 1,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: "#1a1a1a",
         paddingVertical: 10,
     },
 });

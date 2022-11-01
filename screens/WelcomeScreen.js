@@ -17,14 +17,14 @@ const WelcomeScreen = ({ navigation }) => {
         });
     }, []);
     return (
-            <Stack.Navigator initialRouteName='Feed'>
-                <Stack.Screen name='Feed' component={Feed} />
-                <Stack.Screen name='PostScreen' component={PostScreen} options={{presentation:"transparentModal"}} />
-                <Stack.Screen
-                    name='SingleProfilecreen'
-                    component={SingleProfilePage}
-                />
-            </Stack.Navigator>
+        <Stack.Navigator initialRouteName='Feed'>
+            <Stack.Screen name='Feed' component={Feed} />
+            <Stack.Screen name='PostScreen' component={PostScreen} />
+            <Stack.Screen
+                name='SingleProfilecreen'
+                component={SingleProfilePage}
+            />
+        </Stack.Navigator>
     );
 };
 
