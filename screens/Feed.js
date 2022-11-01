@@ -34,16 +34,17 @@ export default function Feed({ navigation }) {
             headerTitleStyle: { color: "white" },
             headerTintColor: "black",
             headerRight: () => (
-                <Button
-                    title={"Connect Wallet"}
-                    type='outline'
-                    buttonStyle={{
-                        marginHorizontal: 10,
-                        borderColor: "white",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                    }}
-                ></Button>
+                // <Button
+                //     title={"Connect Wallet"}
+                //     type='outline'
+                //     buttonStyle={{
+                //         marginHorizontal: 10,
+                //         borderColor: "white",
+                //         borderWidth: 1,
+                //         borderRadius: 10,
+                //     }}
+                // ></Button>
+                <Avatar size={40}/>
             ),
         });
     }, [navigation]);

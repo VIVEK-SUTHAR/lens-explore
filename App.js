@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation, useRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -41,16 +41,17 @@ export default function App() {
                         tabBarStyle: {
                             position: "absolute",
                             backgroundColor: "#2d2d2d",
-                            marginHorizontal: 15,
-                            marginVertical: 20,
-                            borderRadius: 40,
-                            borderColor: "#2d2d2d",
+                            // marginHorizontal: 15,
+                            // paddingVertical:2,
+                            // marginVertical: 20,
+                            // borderRadius: 20,
+                            
                         },
                     })}
                 >
                     <Tab.Screen name='Home' component={WelcomeScreen} />
                     <Tab.Screen name='Profiles' component={ProfileScreen} />
-                    <Tab.Screen name='Account' component={UserProfile} />
+                    <Tab.Screen name='Account' component={UserProfile}/>
                 </Tab.Navigator>
             </NavigationContainer>
         </ApolloProvider>

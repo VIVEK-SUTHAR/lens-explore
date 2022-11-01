@@ -23,7 +23,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
     animationContainer: {
-        flex: 5,
+        height:200,
         justifyContent: "center",
         alignItems:"center"
     },

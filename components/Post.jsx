@@ -10,7 +10,69 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { Image } from "react-native-elements";
 import Avatar from "./Avatar";
-const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
+const Post = ({
+  Postdata,
+  showFullPost,
+  navigation,
+  goToUserProfile,
+  profilePage,
+}) => {
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: "#1d1d1d",
+      shadowOffset: {
+        height: 2,
+        width:5,
+      },
+      paddingVertical: 15,
+      paddingHorizontal: "4%",
+      display: "flex",
+      flexDirection: "column",
+      borderBottomColor: "#F5F8FA",
+      borderTopColor: "#F5F8FA",
+      borderColor: "-#F5F8FA",
+      borderRadius: 25,
+      marginHorizontal: profilePage ? 10 :10,
+      marginVertical: profilePage ? 5 : 10
+    },
+    header: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "flex-start",
+      color: "purple",
+    },
+    name: {
+      fontSize: 16,
+      fontWeight: "500",
+      color: "white",
+      marginHorizontal: 4,
+    },
+    text: {
+      fontSize: 16,
+      color: "lightgreen",
+    },
+    statscontainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderRadius: 8,
+      marginVertical: 4,
+    },
+    stats: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    image: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 10,
+      resizeMode: "contain",
+    },
+  });
+
   function getFormattedPostContent(POST_TEXT) {
     let postwithurls = extractURLs(POST_TEXT);
     // let Post_Text_With_HasTags = HASHTAG_FORMATTER(String(dara.join("")));
@@ -67,7 +129,7 @@ const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
             src={Postdata?.profile?.picture?.original?.url}
             mx={4}
             p={2}
-            size={50}
+            size={40}
           />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -159,56 +221,3 @@ const Post = ({ Postdata, showFullPost, navigation, goToUserProfile }) => {
 };
 
 export default Post;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#1a1a1a",
-    paddingVertical: 15,
-    paddingHorizontal: "4%",
-    display: "flex",
-    flexDirection: "column",
-    borderBottomColor: "#F5F8FA",
-    borderTopColor: "#F5F8FA",
-    borderBottomWidth: 0.18,
-    borderColor: "#F5F8FA",
-    borderTopWidth: 0.18,
-    borderWidth: 0.18,
-    borderRadius: 2,
-  },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    color: "purple",
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "white",
-    marginHorizontal: 4,
-  },
-  text: {
-    fontSize: 16,
-    color: "lightgreen",
-  },
-  statscontainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 8,
-    marginVertical: 4,
-  },
-  stats: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 10,
-    resizeMode: "contain",
-  },
-});

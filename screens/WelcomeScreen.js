@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Feed from "./Feed";
 import PostScreen from "./PostScreen";
 import SingleProfilePage from "./SingleProfilePage";
+import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 const WelcomeScreen = ({ navigation }) => {
     useLayoutEffect(() => {
@@ -16,11 +17,14 @@ const WelcomeScreen = ({ navigation }) => {
         });
     }, []);
     return (
-        <Stack.Navigator initialRouteName='Feed'>
-            <Stack.Screen name='Feed' component={Feed} />
-            <Stack.Screen name='PostScreen' component={PostScreen} />
-            <Stack.Screen name="SingleProfilecreen" component={SingleProfilePage}/>
-        </Stack.Navigator>
+            <Stack.Navigator initialRouteName='Feed'>
+                <Stack.Screen name='Feed' component={Feed} />
+                <Stack.Screen name='PostScreen' component={PostScreen} options={{presentation:"transparentModal"}} />
+                <Stack.Screen
+                    name='SingleProfilecreen'
+                    component={SingleProfilePage}
+                />
+            </Stack.Navigator>
     );
 };
 
