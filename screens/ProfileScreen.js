@@ -6,6 +6,7 @@ import RecommendedProfiles from "../query/RecommendedProfiles";
 import ProfileCard from "../components/ProfileCard";
 import { createStackNavigator } from "@react-navigation/stack";
 import SingleProfilePage from "./SingleProfilePage";
+import Loader from "../components/Loader"
 const Stack = createStackNavigator();
 
 const ProfileScreen = ({ navigation }) => {
@@ -57,9 +58,7 @@ const ProfileFeed = ({ navigation }) => {
         <ScrollView style={styles.container}>
             <StatusBar style='light' />
             {!data ? (
-                <View>
-                    <Text>Loading....</Text>
-                </View>
+                <Loader/>
             ) : (
                 data.recommendedProfiles.map((item, index) => {
                     return (

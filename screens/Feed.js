@@ -12,7 +12,6 @@ import { useQuery } from "@apollo/client";
 import LatestPost from "../query/LatestPost";
 import Post from "../components/Post";
 import Avatar from "../components/Avatar";
-import { Button } from "react-native-elements";
 import Loader from "../components/Loader";
 export default function Feed({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
