@@ -17,12 +17,13 @@ const Post = ({
   goToUserProfile,
   profilePage,
 }) => {
+  console.log(Postdata?.metadata?.media[0]?.original);
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#1d1d1d",
       shadowOffset: {
         height: 2,
-        width:5,
+        width: 5,
       },
       paddingVertical: 15,
       paddingHorizontal: "4%",
@@ -32,8 +33,8 @@ const Post = ({
       borderTopColor: "#F5F8FA",
       borderColor: "-#F5F8FA",
       borderRadius: 25,
-      marginHorizontal: profilePage ? 10 :10,
-      marginVertical: profilePage ? 5 : 10
+      marginHorizontal: profilePage ? 10 : 10,
+      marginVertical: profilePage ? 5 : 10,
     },
     header: {
       display: "flex",
@@ -111,6 +112,19 @@ const Post = ({
       );
     return renderText(txt);
   }
+
+  function getLink(url) {
+     const gateway = "https://ipfs.filebase.com/ipfs/"
+  if (!url) return url
+
+  const frurl=url
+    .replace(/^Qm[1-9A-Za-z]{44}/gm, `${gateway}${url}`)
+    .replace('https://ipfs.io/ipfs/', gateway)
+    .replace('https://ipfs.infura.io/ipfs/', gateway)
+    .replace('ipfs://', gateway)
+    return frurl
+  }
+
   return (
     <View style={styles.container}>
       <View
@@ -170,17 +184,17 @@ const Post = ({
             {/* {HASHTAG_FORMATTER(Postdata?.metadata?.content)} */}
             {getFormattedPostContent(Postdata?.metadata?.content)}
           </Text>
-          {Postdata?.metadata?.image ? (
+          {Postdata?.metadata?.media[0]?.original?.url.length>0 ? (
             <View
               style={{
-                backgroundColor: "lightcoral",
+                backgroundColor: "#1d1d1d",
                 height: 220,
                 borderRadius: 10,
               }}
             >
               <Image
                 source={{
-                  uri: Postdata?.metadata?.image,
+                  uri: getLink(Postdata?.metadata?.media[0]?.original?.url),
                 }}
                 style={styles.image}
               />

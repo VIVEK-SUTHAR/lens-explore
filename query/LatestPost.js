@@ -4,8 +4,8 @@ export default gql`
     query ExplorePublications {
         explorePublications(
             request: {
-                sortCriteria: TOP_COMMENTED
-                publicationTypes: [POST, MIRROR]
+                sortCriteria: TOP_COLLECTED
+                publicationTypes: [POST]
             }
         ) {
             items {

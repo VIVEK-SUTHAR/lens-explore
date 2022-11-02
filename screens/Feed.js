@@ -16,6 +16,7 @@ import { Button } from "react-native-elements";
 import Loader from "../components/Loader";
 export default function Feed({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
+
     const wait = timeout => {
         return new Promise(resolve => setTimeout(resolve, timeout));
     };
@@ -23,29 +24,16 @@ export default function Feed({ navigation }) {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
-    
+
     var { loading, error, data } = useQuery(LatestPost);
-    
-    
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Dive into Feed",
             headerStyle: { backgroundColor: "#1e1e1e" },
             headerTitleStyle: { color: "white" },
             headerTintColor: "black",
-            headerRight: () => (
-                // <Button
-                //     title={"Connect Wallet"}
-                //     type='outline'
-                //     buttonStyle={{
-                //         marginHorizontal: 10,
-                //         borderColor: "white",
-                //         borderWidth: 1,
-                //         borderRadius: 10,
-                //     }}
-                // ></Button>
-                <Avatar size={40}/>
-            ),
+            headerRight: () => <Avatar size={40} />,
         });
     }, [navigation]);
     const showFullPost = (id, title, post) => {
@@ -87,7 +75,7 @@ export default function Feed({ navigation }) {
                     })}
                 </>
             ) : (
-                <Loader/>
+                <Loader />
             )}
         </ScrollView>
     );

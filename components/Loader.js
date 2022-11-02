@@ -12,7 +12,7 @@ export default function App() {
                 style={{
                     height: "auto",
                 }}
-                source={require("../assets/loader2.json")}
+                source={require("../assets/loader3.json")}
             />
             <View style={styles.buttonContainer}>
                 <Text style={styles.buttonContainer}>Getting Posts</Text>
@@ -23,7 +23,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
     animationContainer: {
-        height:200,
+        height:300,
         justifyContent: "center",
         alignItems:"center"
     },

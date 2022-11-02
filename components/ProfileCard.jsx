@@ -13,9 +13,9 @@ const ProfileCard = ({ profile, navigation, showFullProfile }) => {
                 style={{
                     width: "100%",
                     height: 100,
-                    borderTopLeftRadius: 5,
-                    borderTopRightRadius: 5,
-                    resizeMode: "contain",
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                    resizeMode: "cover",
                 }}
                 source={{
                     uri:
@@ -23,7 +23,7 @@ const ProfileCard = ({ profile, navigation, showFullProfile }) => {
                         "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
                 }}
             />
-            <Avatar src={profile?.picture?.original?.url} mt={-45} size={80} />
+            <Avatar src={profile?.picture?.original?.url} mt={-45} size={80} borderColor="#1a1a1a" borderWidth={2} />
             <View style={styles.profileInfo}>
                 <Text style={{ color: "white", fontSize: 18 }}>
                     @{profile?.handle}
@@ -66,10 +66,14 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         flexDirection: "column",
         justifyContent: "center",
+        marginHorizontal: 15,
+        marginVertical: 10,
+        
         alignItems: "center",
         borderColor: "#F5F8FA",
         borderTopWidth: 0.18,
         borderWidth: 0.18,
+        borderRadius:10
     },
     profileInfo: {
         marginVertical: 5,

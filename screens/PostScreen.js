@@ -17,11 +17,8 @@ const PostScreen = ({ navigation, route }) => {
             navigation.getParent()?.setOptions({
                 tabBarStyle: {
                     position: "absolute",
-                    backgroundColor: "#2d2d2d",
-                    marginHorizontal: 15,
-                    marginVertical: 20,
-                    borderRadius: 40,
-                    borderColor: "#2d2d2d",
+                    backgroundColor: "#1a1a1a",
+                    borderEndColor: "#1a1a1a",
                 },
             });
     }, [navigation]);

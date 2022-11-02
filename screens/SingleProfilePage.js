@@ -4,6 +4,7 @@ import {
     ScrollView,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -23,12 +24,12 @@ const SingleProfilePage = ({ navigation, route }) => {
         navigation.setOptions({
             title: route.params.profile?.name,
             headerStyle: {
-                backgroundColor: YPOint >= 158 ? "lightgray" : "#2d2d2d",
-                height: 10,
+                backgroundColor: YPOint >= 158 ? "#1a1a1a" : "#1a1a1a",
+                elevation: 0,
             },
             headerTitleStyle: { color: "green" },
             headerTintColor: "white",
-            headerShown: false,
+            headerShown: YPOint >= 160 ? true : false,
         });
     }, [YPOint]);
     const { loading, error, data } = useQuery(FetchProfileQuery, {
@@ -62,11 +63,11 @@ const SingleProfilePage = ({ navigation, route }) => {
                             }}
                             source={{
                                 uri:
-                                profile?.coverPicture?.original?.url ||
-                                "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
+                                    profile?.coverPicture?.original?.url ||
+                                    "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
                             }}
                         />
-                        <Button title={"hi"} style={{width:50}} />
+
                         <Image
                             style={{
                                 width: 100,
@@ -87,9 +88,31 @@ const SingleProfilePage = ({ navigation, route }) => {
                         />
                     </View>
                     <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
-                        <Text style={{ color: "aliceblue", fontSize: 24 }}>
-                            {profile?.name}
-                        </Text>
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                minHeight:50
+                            }}
+                        >
+                            <Text style={{ color: "aliceblue", fontSize: 24 }}>
+                                {profile?.name}
+                            </Text>
+                            <TouchableOpacity>
+                                <View style={{
+                                    borderWidth: 1,
+                                    borderColor: "white",
+                                    paddingHorizontal: 12,
+                                    paddingVertical:7,
+                                    borderRadius: 10,
+                                    
+                                    
+                                }}>
+                                    <Text style={{color:"white",fontSize:16}}>Follow</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                         <Text style={{ color: "grey", fontSize: 18 }}>
                             @{profile?.handle}
                         </Text>
