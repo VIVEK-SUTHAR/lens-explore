@@ -17,7 +17,6 @@ const Post = ({
   goToUserProfile,
   profilePage,
 }) => {
-  console.log(Postdata?.metadata?.media[0]?.original);
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#1d1d1d",
@@ -101,7 +100,7 @@ const Post = ({
     const URL_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
     const renderText = (txt) =>
-      txt.split(" ").map((part, index) =>
+      txt?.split(" ").map((part, index) =>
         URL_REGEX.test(part) ? (
           <Text key={index} style={{ color: "lightblue" }}>
             {part}{" "}
@@ -114,15 +113,15 @@ const Post = ({
   }
 
   function getLink(url) {
-     const gateway = "https://ipfs.filebase.com/ipfs/"
-  if (!url) return url
+    const gateway = "https://ipfs.io/ipfs/";
+    if (!url) return url;
 
-  const frurl=url
-    .replace(/^Qm[1-9A-Za-z]{44}/gm, `${gateway}${url}`)
-    .replace('https://ipfs.io/ipfs/', gateway)
-    .replace('https://ipfs.infura.io/ipfs/', gateway)
-    .replace('ipfs://', gateway)
-    return frurl
+    const frurl = url
+      .replace(/^Qm[1-9A-Za-z]{44}/gm, `${gateway}${url}`)
+      .replace("https://ipfs.io/ipfs/", gateway)
+      .replace("https://ipfs.infura.io/ipfs/", gateway)
+      .replace("ipfs://", gateway);
+    return frurl;
   }
 
   return (
@@ -140,7 +139,10 @@ const Post = ({
           }}
         >
           <Avatar
-            src={Postdata?.profile?.picture?.original?.url}
+            src={
+              Postdata?.profile?.picture?.original?.url ||
+              Postdata?.profile?.picture?.uri
+            }
             mx={4}
             p={2}
             size={40}
@@ -184,7 +186,7 @@ const Post = ({
             {/* {HASHTAG_FORMATTER(Postdata?.metadata?.content)} */}
             {getFormattedPostContent(Postdata?.metadata?.content)}
           </Text>
-          {Postdata?.metadata?.media[0]?.original?.url.length>0 ? (
+          {Postdata?.metadata?.media[0]?.original?.url.length > 0 ? (
             <View
               style={{
                 backgroundColor: "#1d1d1d",

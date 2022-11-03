@@ -11,8 +11,8 @@ import { StatusBar } from "expo-status-bar";
 import { useQuery } from "@apollo/client";
 import LatestPost from "../query/LatestPost";
 import Post from "../components/Post";
-import Avatar from "../components/Avatar";
 import Loader from "../components/Loader";
+import Avatar from "../components/Avatar";
 export default function Feed({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Feed({ navigation }) {
             headerStyle: { backgroundColor: "#1e1e1e" },
             headerTitleStyle: { color: "white" },
             headerTintColor: "black",
-            headerRight: () => <Avatar size={40} />,
+            headerRight: () => <Avatar size={40} borderColor={"white"} borderWidth={1} />,
         });
     }, [navigation]);
     const showFullPost = (id, title, post) => {

@@ -1,7 +1,14 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+    KeyboardAvoidingView,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+} from "react-native";
 import React, { useLayoutEffect } from "react";
 import Button from "../components/Button";
-
+import Avatar from "../components/Avatar";
 const CreatePost = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -17,10 +24,9 @@ const CreatePost = ({ navigation }) => {
                         bg={"rgba(255,255,255,0)"}
                         bordrWidth={1}
                         borderColor={"white"}
-                        borderRadius={8}
+                        borderRadius={18}
                         px={15}
                         mx={20}
-                        
                     />
                 );
             },
@@ -29,7 +35,50 @@ const CreatePost = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text>CreatePost</Text>
+            <View
+                style={{
+                    flexDirection: "row",
+                }}
+            >
+                <Avatar size={45} />
+                <View>
+                    <Text
+                        style={{
+                            color: "white",
+                            fontSize: 15,
+                            fontWeight: "900",
+                        }}
+                    >
+                        Vivek
+                    </Text>
+                    <Text
+                        style={{
+                            color: "white",
+                            fontSize: 15,
+                            fontWeight: "700",
+                            color: "lightgray",
+                        }}
+                    >
+                        iamvivek.lens
+                    </Text>
+                </View>
+            </View>
+            <View
+                style={{
+                    marginVertical: 20,
+                }}
+            >
+                <TextInput
+                    placeholder='Write down your thoughts'
+                    placeholderTextColor={"white"}
+                    cursorColor={"white"}
+                    autoFocus={true}
+                    style={{
+                        fontSize: 20,
+                        color: "white",
+                    }}
+                />
+            </View>
         </View>
     );
 };
@@ -40,5 +89,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#1a1a1a",
+        padding: 20,
     },
 });

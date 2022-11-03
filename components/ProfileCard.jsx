@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Avatar from "./Avatar";
+import { getIPFSLink } from "../utils/getIPFSLink";
 const ProfileCard = ({ profile, navigation, showFullProfile }) => {
     return (
         <View
@@ -20,6 +21,7 @@ const ProfileCard = ({ profile, navigation, showFullProfile }) => {
                 source={{
                     uri:
                         profile?.coverPicture?.original?.url ||
+                        getIPFSLink(profile?.profile?.picture?.uri) ||
                         "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
                 }}
             />

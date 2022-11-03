@@ -136,7 +136,7 @@ const PostScreen = ({ navigation, route }) => {
                             {post?.appId.toUpperCase()}
                         </Text>
                     </View> */}
-                    <Post Postdata={post}/>
+                    <Post Postdata={post} />
                 </ScrollView>
             </SafeAreaView>
             <View
@@ -150,6 +150,7 @@ const PostScreen = ({ navigation, route }) => {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    
                 }}
             >
                 <Avatar size={40} mx={0} />
@@ -160,9 +161,10 @@ const PostScreen = ({ navigation, route }) => {
                     style={{
                         color: "white",
                         flex: 1,
+                        borderColor: "white",
                     }}
                 />
-                <Icon name='send' color={"white"} size={28} />
+                <Icon name='send' color={"white"} size={28} style={{marginHorizontal:10}} />
             </View>
         </>
     );

@@ -13,6 +13,7 @@ import { useQuery } from "@apollo/client";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import { Button } from "react-native-elements";
+import { getIPFSLink } from "../utils/getIPFSLink";
 const SingleProfilePage = ({ navigation, route }) => {
     console.log(route.params.profile.id);
     const [profile, setProfile] = useState(null);
@@ -64,6 +65,7 @@ const SingleProfilePage = ({ navigation, route }) => {
                             source={{
                                 uri:
                                     profile?.coverPicture?.original?.url ||
+                                    getIPFSLink(profile?.picture?.uri) ||
                                     "https://ipfs.filebase.io/ipfs/QmXEt1LUNSS22AQfGhqrfUUbMLN3LeEUbw8Bo3x5JrYGcX",
                             }}
                         />
@@ -83,6 +85,7 @@ const SingleProfilePage = ({ navigation, route }) => {
                             source={{
                                 uri:
                                     profile?.picture?.original?.url ||
+                                    getIPFSLink(profile?.picture?.uri) ||
                                     "https://imgs.search.brave.com/-BmioenTWbLsbjE6EQ54mPZWygVqDD2FX6aVKoBz6vw/rs:fit:336:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/YUlNQXVQajVmVF90/T2E0MHFqeWFBQUFB/QSZwaWQ9QXBp",
                             }}
                         />
@@ -93,23 +96,27 @@ const SingleProfilePage = ({ navigation, route }) => {
                                 flexDirection: "row",
                                 justifyContent: "space-between",
                                 alignItems: "center",
-                                minHeight:50
+                                minHeight: 50,
                             }}
                         >
                             <Text style={{ color: "aliceblue", fontSize: 24 }}>
                                 {profile?.name}
                             </Text>
                             <TouchableOpacity>
-                                <View style={{
-                                    borderWidth: 1,
-                                    borderColor: "white",
-                                    paddingHorizontal: 12,
-                                    paddingVertical:7,
-                                    borderRadius: 10,
-                                    
-                                    
-                                }}>
-                                    <Text style={{color:"white",fontSize:16}}>Follow</Text>
+                                <View
+                                    style={{
+                                        borderWidth: 1,
+                                        borderColor: "white",
+                                        paddingHorizontal: 12,
+                                        paddingVertical: 7,
+                                        borderRadius: 18,
+                                    }}
+                                >
+                                    <Text
+                                        style={{ color: "white", fontSize: 16 }}
+                                    >
+                                        Follow
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

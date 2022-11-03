@@ -1,7 +1,22 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getIPFSLink } from "../utils/getIPFSLink";
 
-const Avatar = ({ src, size, mt, mx, p ,onClick,borderColor,borderWidth}) => {
+const Avatar = ({
+  src,
+  size,
+  mt,
+  mx,
+  p,
+  onClick,
+  borderColor,
+  borderWidth,
+}) => {
+  const [seed, setSeed] = useState("");
+  useEffect(() => {
+    setSeed(Math.floor(Math.random() * 5000));
+  }, []);
+
   return (
     <View
       style={{
@@ -16,7 +31,7 @@ const Avatar = ({ src, size, mt, mx, p ,onClick,borderColor,borderWidth}) => {
           width: size ? size : 55,
           borderRadius: 100,
           borderColor: borderColor ? borderColor : "",
-          borderWidth:borderWidth?borderWidth:0,
+          borderWidth: borderWidth ? borderWidth : 0,
           padding: p ? p : 4,
           borderColor: "white",
           marginTop: mt ? mt : 0,
@@ -24,7 +39,7 @@ const Avatar = ({ src, size, mt, mx, p ,onClick,borderColor,borderWidth}) => {
           backgroundColor: src ? "" : "purple",
         }}
         source={{
-          uri: src || "https://avatars.dicebear.com/api/avataaars/john.svg",
+          uri: getIPFSLink(src),
         }}
       />
     </View>
