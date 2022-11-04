@@ -9,6 +9,7 @@ import {
 import React, { useLayoutEffect } from "react";
 import Button from "../components/Button";
 import Avatar from "../components/Avatar";
+import { Input } from "react-native-elements";
 const CreatePost = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -76,8 +77,10 @@ const CreatePost = ({ navigation }) => {
                     style={{
                         fontSize: 20,
                         color: "white",
+                        fontWeight:"600"
                     }}
                 />
+                
             </View>
         </View>
     );

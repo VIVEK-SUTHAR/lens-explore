@@ -1,4 +1,5 @@
 import {
+    Animated,
     Image,
     SafeAreaView,
     ScrollView,
@@ -11,9 +12,11 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import FetchProfileQuery from "../query/FetchProfileQuery";
 import { useQuery } from "@apollo/client";
 import Post from "../components/Post";
+import Button from "../components/Button";
 import Loader from "../components/Loader";
-import { Button } from "react-native-elements";
 import { getIPFSLink } from "../utils/getIPFSLink";
+import { StatusBar } from "expo-status-bar";
+import { MaterialBottomTabView } from "@react-navigation/material-bottom-tabs";
 const SingleProfilePage = ({ navigation, route }) => {
     console.log(route.params.profile.id);
     const [profile, setProfile] = useState(null);
@@ -27,6 +30,8 @@ const SingleProfilePage = ({ navigation, route }) => {
             headerStyle: {
                 backgroundColor: YPOint >= 158 ? "#1a1a1a" : "#1a1a1a",
                 elevation: 0,
+                maxHeight: 80,
+                minHeight: 0,
             },
             headerTitleStyle: { color: "green" },
             headerTintColor: "white",
@@ -113,7 +118,10 @@ const SingleProfilePage = ({ navigation, route }) => {
                                     }}
                                 >
                                     <Text
-                                        style={{ color: "white", fontSize: 16 }}
+                                        style={{
+                                            color: "white",
+                                            fontSize: 16,
+                                        }}
                                     >
                                         Follow
                                     </Text>
@@ -148,10 +156,10 @@ const SingleProfilePage = ({ navigation, route }) => {
                                 borderRadius: 5,
                             }}
                         >
-                            <Text style={{ color: "aliceblue", fontSize: 14 }}>
+                            <Text style={{ color: "aliceblue", fontSize: 20,fontWeight:"700" }}>
                                 {profile?.stats?.totalFollowers}
                             </Text>
-                            <Text style={{ color: "white" }}>Followers</Text>
+                            <Text style={{ color: "white",fontSize:14 }}>Followers</Text>
                         </View>
                         <View
                             style={{
@@ -163,23 +171,47 @@ const SingleProfilePage = ({ navigation, route }) => {
                                 borderRadius: 5,
                             }}
                         >
-                            <Text style={{ color: "aliceblue", fontSize: 14 }}>
+                            <Text style={{ color: "aliceblue", fontSize: 20,fontWeight:"700" }}>
                                 {profile?.stats?.totalFollowing}
                             </Text>
-                            <Text style={{ color: "white" }}>Followers</Text>
+                            <Text style={{ color: "white",fontSize:14 }}>Followers</Text>
                         </View>
                     </View>
                     <View>
-                        <Text
+                        <View
                             style={{
-                                color: "white",
-                                fontSize: 24,
-                                marginHorizontal: 20,
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                backgroundColor: "#1f1f1f",
+                                marginHorizontal: 10,
+                                paddingHorizontal: 10,
+                                paddingVertical: 10,
+                                borderRadius: 25,
                             }}
                         >
-                            {" "}
-                            Posts By {profile?.name}
-                        </Text>
+                            <Button
+                                title={"Posts"}
+                                bg={"#2d2d2d"}
+                                borderRadius={15}
+                                px={20}
+                                py={5}
+                                fontSize={20}
+                            />
+                            <Button
+                                title={"Mirrors"}
+                                borderRadius={25}
+                                px={20}
+                                py={5}
+                                fontSize={20}
+                            />
+                            <Button
+                                title={"Collects"}
+                                borderRadius={25}
+                                px={20}
+                                py={5}
+                                fontSize={20}
+                            />
+                        </View>
                         {!data && <Loader />}
                         {data?.publications?.items.map((post, idx) => {
                             return (

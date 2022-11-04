@@ -16,6 +16,7 @@ const Button = ({
   fontSize,
   mx,
   color,
+  fw
 }) => {
   return (
     <TouchableOpacity>
@@ -38,6 +39,7 @@ const Button = ({
           style={{
             fontSize: fontSize || 18,
             color: color || "white",
+            fontWeight:fw || "500"
           }}
         >
           {title}

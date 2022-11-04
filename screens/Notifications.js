@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Button from "../components/Button";
 
-function UserProfile({ navigation }) {
+function Notifications({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Account",
@@ -20,30 +20,28 @@ function UserProfile({ navigation }) {
         <View style={styles.container}>
             <Text
                 style={{
-                    fontSize: 20,
-                    textAlign: "center",
                     color: "white",
+                    fontSize: 24,
                     fontWeight: "700",
-                    marginVertical: 10,
                 }}
             >
-                You need to connect you wallet to get started
+                No new notifications
             </Text>
-            <Button
-                title={"Connect Wallet"}
-                bg={"white"}
-                color={"black"}
-                fw={"800"}
-                fontSize={24}
-                px={20}
-                py={10}
-                borderRadius={25}
-            />
+            <Text
+                style={{
+                    color: "white",
+                    fontSize: 20,
+                    fontWeight: "400",
+                    textAlign:"center"
+                }}
+            >
+                Go post some content and check again
+            </Text>
         </View>
     );
 }
 
-export default UserProfile;
+export default Notifications;
 
 const styles = StyleSheet.create({
     container: {

@@ -15,6 +15,7 @@ import CreatePost from "./screens/CreatePost";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Notifications from "./screens/Notifications";
 const Tab = createBottomTabNavigator();
 const client = new ApolloClient({
     uri: "https://api.lens.dev",
@@ -118,7 +119,7 @@ export default function App() {
                         />
                         <Tab.Screen
                             name='Notifications'
-                            component={UserProfile}
+                            component={Notifications}
                             options={{
                                 tabBarIcon: ({ focused }) => {
                                     return (
