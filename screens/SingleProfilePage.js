@@ -95,7 +95,7 @@ const SingleProfilePage = ({ navigation, route }) => {
                             }}
                         />
                     </View>
-                    <View style={{ marginHorizontal: 20, marginVertical: 20 }}>
+                    <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
                         <View
                             style={{
                                 flexDirection: "row",
@@ -107,26 +107,15 @@ const SingleProfilePage = ({ navigation, route }) => {
                             <Text style={{ color: "aliceblue", fontSize: 24 }}>
                                 {profile?.name}
                             </Text>
-                            <TouchableOpacity>
-                                <View
-                                    style={{
-                                        borderWidth: 1,
-                                        borderColor: "white",
-                                        paddingHorizontal: 12,
-                                        paddingVertical: 7,
-                                        borderRadius: 18,
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            color: "white",
-                                            fontSize: 16,
-                                        }}
-                                    >
-                                        Follow
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+                            <Button
+                                title={"Follow"}
+                                bordrWidth={2}
+                                borderColor={"white"}
+                                px={20}
+                                py={6}
+                                fw={"800"}
+                                borderRadius={25}
+                            />
                         </View>
                         <Text style={{ color: "grey", fontSize: 18 }}>
                             @{profile?.handle}
@@ -139,42 +128,53 @@ const SingleProfilePage = ({ navigation, route }) => {
                     </View>
                     <View
                         style={{
-                            marginHorizontal: 20,
-                            marginVertical: 10,
                             flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "space-around",
+                            flex: 1,
+                            justifyContent: "flex-start",
+                            paddingHorizontal: 20,
+                            marginVertical: 20,
                         }}
                     >
-                        <View
-                            style={{
-                                height: 50,
-                                width: 80,
-                                justifyContent: "space-around",
-                                alignItems: "center",
-                                backgroundColor: "rgba(255,255,255,0.09)",
-                                borderRadius: 5,
-                            }}
-                        >
-                            <Text style={{ color: "aliceblue", fontSize: 20,fontWeight:"700" }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    color: "white",
+                                    fontWeight: "700",
+                                }}
+                            >
                                 {profile?.stats?.totalFollowers}
                             </Text>
-                            <Text style={{ color: "white",fontSize:14 }}>Followers</Text>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    color: "lightgray",
+                                    marginHorizontal: 4,
+                                }}
+                            >
+                                Followers
+                            </Text>
                         </View>
-                        <View
-                            style={{
-                                height: 50,
-                                width: 80,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                backgroundColor: "rgba(255,255,255,0.09)",
-                                borderRadius: 5,
-                            }}
-                        >
-                            <Text style={{ color: "aliceblue", fontSize: 20,fontWeight:"700" }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    color: "white",
+                                    fontWeight: "700",
+                                }}
+                            >
+                                {" "}
                                 {profile?.stats?.totalFollowing}
                             </Text>
-                            <Text style={{ color: "white",fontSize:14 }}>Followers</Text>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    color: "lightgray",
+                                    marginHorizontal: 4,
+                                }}
+                            >
+                                Following
+                            </Text>
                         </View>
                     </View>
                     <View>
@@ -192,7 +192,7 @@ const SingleProfilePage = ({ navigation, route }) => {
                             <Button
                                 title={"Posts"}
                                 bg={"#2d2d2d"}
-                                borderRadius={15}
+                                borderRadius={25}
                                 px={20}
                                 py={5}
                                 fontSize={20}

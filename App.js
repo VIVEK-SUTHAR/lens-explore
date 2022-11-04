@@ -24,120 +24,131 @@ const client = new ApolloClient({
 
 export default function App() {
     return (
-            <ApolloProvider client={client}>
-                <NavigationContainer>
-                    <Tab.Navigator
-                        initialRouteName='Home'
-                        screenOptions={() => ({
-                            tabBarStyle: {
-                                position: "absolute",
-                                backgroundColor: "#1a1a1a",
-                                borderEndColor: "#1a1a1a",
+        <ApolloProvider client={client}>
+            <NavigationContainer>
+                <Tab.Navigator
+                    initialRouteName='Home'
+                    screenOptions={() => ({
+                        tabBarStyle: {
+                            position: "absolute",
+                            bottom: 0,
+                            backgroundColor: "#1a1a1a",
+                            borderTopColor: "#transparent",
+                            borderTopWidth:0,
+                            backgroundColor: "#1a1a1a",
+                        },
+                        tabBarActiveTintColor: "white",
+                        
+                    })}
+                >
+                    <Tab.Screen
+                        name='Home'
+                        component={WelcomeScreen}
+                        options={{
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <Ionicons
+                                        name={
+                                            focused
+                                                ? "ios-home"
+                                                : "ios-home-outline"
+                                        }
+                                        size={25}
+                                        color={"white"}
+                                    />
+                                );
                             },
-                            tabBarActiveTintColor: "white",
-                        })}
-                    >
-                        <Tab.Screen
-                            name='Home'
-                            component={WelcomeScreen}
-                            options={{
-                                tabBarIcon: ({ focused }) => {
-                                    return (
-                                        <Ionicons
-                                            name={
-                                                focused
-                                                    ? "ios-home"
-                                                    : "ios-home-outline"
-                                            }
-                                            size={25}
-                                            color={"white"}
-                                        />
-                                    );
-                                },
-                            }}
-                        />
-                        <Tab.Screen
-                            name='Profiles'
-                            component={ProfileScreen}
-                            options={{
-                                tabBarIcon: ({ focused }) => {
-                                    return (
-                                        <Ionicons
-                                            name={
-                                                focused
-                                                    ? "ios-people"
-                                                    : "ios-people-outline"
-                                            }
-                                            size={25}
-                                            color={"white"}
-                                        />
-                                    );
-                                },
-                            }}
-                        />
-                        <Tab.Screen
-                            name='Post'
-                            component={CreatePost}
-                            options={{
-                                tabBarVisibilityAnimationConfig: "hide",
-                                tabBarIcon: ({ focused }) => {
-                                    return (
-                                        <AntDesign
-                                            name={
-                                                focused
-                                                    ? "pluscircle"
-                                                    : "pluscircleo"
-                                            }
-                                            size={30}
-                                            style={{
-                                                zIndex: 10,
-                                            }}
-                                            color={"white"}
-                                        />
-                                    );
-                                },
-                            }}
-                        />
-                        <Tab.Screen
-                            name='Account'
-                            component={UserProfile}
-                            options={{
-                                tabBarIcon: ({ focused }) => {
-                                    return (
-                                        <MaterialCommunityIcons
-                                            name={
-                                                focused
-                                                    ? "account-circle"
-                                                    : "account-circle-outline"
-                                            }
-                                            size={25}
-                                            color={"white"}
-                                        />
-                                    );
-                                },
-                            }}
-                        />
-                        <Tab.Screen
-                            name='Notifications'
-                            component={Notifications}
-                            options={{
-                                tabBarIcon: ({ focused }) => {
-                                    return (
-                                        <Ionicons
-                                            name={
-                                                focused
-                                                    ? "ios-notifications-sharp"
-                                                    : "ios-notifications-outline"
-                                            }
-                                            size={25}
-                                            color={"white"}
-                                        />
-                                    );
-                                },
-                            }}
-                        />
-                    </Tab.Navigator>
-                </NavigationContainer>
-            </ApolloProvider>
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Profiles'
+                        component={ProfileScreen}
+                        options={{
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <Ionicons
+                                        name={
+                                            focused
+                                                ? "ios-people"
+                                                : "ios-people-outline"
+                                        }
+                                        size={25}
+                                        color={"white"}
+                                    />
+                                );
+                            },
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Post'
+                        component={CreatePost}
+                        options={{
+                            tabBarVisibilityAnimationConfig: "hide",
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <AntDesign
+                                        name={
+                                            focused
+                                                ? "pluscircle"
+                                                : "pluscircleo"
+                                        }
+                                        size={30}
+                                        style={{
+                                            zIndex: 10,
+                                        }}
+                                        color={"white"}
+                                    />
+                                );
+                            },
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Account'
+                        component={UserProfile}
+                        options={{
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <MaterialCommunityIcons
+                                        name={
+                                            focused
+                                                ? "account-circle"
+                                                : "account-circle-outline"
+                                        }
+                                        size={25}
+                                        color={"white"}
+                                    />
+                                );
+                            },
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Notifications'
+                        component={Notifications}
+                        options={{
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <Ionicons
+                                        name={
+                                            focused
+                                                ? "ios-notifications-sharp"
+                                                : "ios-notifications-outline"
+                                        }
+                                        size={25}
+                                        color={"white"}
+                                    />
+                                );
+                            },
+                            tabBarBadge: 1,
+                            tabBarBadgeStyle: {
+                                position: "absolute",
+                                backgroundColor: "purple",
+                                top: 0,
+                                left: 0,
+                            },
+                        }}
+                    />
+                </Tab.Navigator>
+            </NavigationContainer>
+        </ApolloProvider>
     );
 }
